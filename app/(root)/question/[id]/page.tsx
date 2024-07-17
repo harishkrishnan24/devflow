@@ -41,35 +41,44 @@ const Page = async ({ params }: any) => {
             </p>
           </Link>
           <div className="flex justify-end">
-            <Votes />
+            <Votes
+              type="Question"
+              itemId={JSON.stringify(result._id)}
+              userId={JSON.stringify(mongoUser._id)}
+              upvotes={result.upvotes.length}
+              hasUpVoted={result.upvotes.includes(mongoUser._id)}
+              downvotes={result.downvotes.length}
+              hasDownVoted={result.downvotes.includes(mongoUser._id)}
+              hasSaved={mongoUser?.saved.includes(result._id)}
+            />
           </div>
-          <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
-            {result.title}
-          </h2>
         </div>
-        <div className="mb-8 mt-5 flex flex-wrap gap-4">
-          <Metric
-            imgUrl="/assets/icons/clock.svg"
-            alt="clock icon"
-            value={`asked ${getTimestamp(result.createdAt)}}`}
-            title=" Asked"
-            textStyles="small-medium text-dark400_light800"
-          />
-          <Metric
-            imgUrl="/assets/icons/message.svg"
-            alt="message"
-            value={formatAndDivideNumber(result.answers.length)}
-            title=" Answers"
-            textStyles="small-medium text-dark400_light800"
-          />
-          <Metric
-            imgUrl="/assets/icons/eye.svg"
-            alt="eye"
-            value={formatAndDivideNumber(result.views)}
-            title=" Views"
-            textStyles="small-medium text-dark400_light800"
-          />
-        </div>
+        <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
+          {result.title}
+        </h2>
+      </div>
+      <div className="mb-8 mt-5 flex flex-wrap gap-4">
+        <Metric
+          imgUrl="/assets/icons/clock.svg"
+          alt="clock icon"
+          value={`asked ${getTimestamp(result.createdAt)}`}
+          title=" Asked"
+          textStyles="small-medium text-dark400_light800"
+        />
+        <Metric
+          imgUrl="/assets/icons/message.svg"
+          alt="message"
+          value={formatAndDivideNumber(result.answers.length)}
+          title=" Answers"
+          textStyles="small-medium text-dark400_light800"
+        />
+        <Metric
+          imgUrl="/assets/icons/eye.svg"
+          alt="eye"
+          value={formatAndDivideNumber(result.views)}
+          title=" Views"
+          textStyles="small-medium text-dark400_light800"
+        />
       </div>
       <ParseHTML data={result.content} />
       <div className="mt-8 flex flex-wrap gap-2">
@@ -84,7 +93,7 @@ const Page = async ({ params }: any) => {
       </div>
       <AllAnswers
         questionId={result._id}
-        authorId={JSON.stringify(mongoUser._id)}
+        authorId={mongoUser._id}
         totalAnswers={result.answers.length}
       />
       <Answer
