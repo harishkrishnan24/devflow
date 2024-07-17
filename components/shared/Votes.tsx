@@ -1,6 +1,7 @@
 "use client";
 
 import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.action";
+import { viewQuestion } from "@/lib/actions/interaction.action";
 import {
   downvoteQuestion,
   upvoteQuestion,
@@ -9,6 +10,7 @@ import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 interface Props {
   type: string;
@@ -32,6 +34,13 @@ const Votes = ({
   hasSaved,
 }: Props) => {
   const pathname = usePathname();
+
+  useEffect(() => {
+    viewQuestion({
+      userId: userId ? JSON.parse(userId) : undefined,
+      questionId: JSON.parse(itemId),
+    });
+  }, [itemId, userId, pathname]);
 
   const handleSave = async () => {
     await toggleSaveQuestion({
