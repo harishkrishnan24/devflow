@@ -11,6 +11,7 @@ import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   type: string;
@@ -48,10 +49,20 @@ const Votes = ({
       userId: JSON.parse(userId),
       path: pathname,
     });
+    return toast({
+      title: `Question ${
+        !hasSaved ? "Saved in" : "Removed from"
+      } your collection`,
+      variant: !hasSaved ? "default" : "destructive",
+    });
   };
 
   const handleVote = async (action: "upvote" | "downvote") => {
-    if (!userId) return;
+    if (!userId)
+      return toast({
+        title: "Please log in",
+        description: "You must be logged in to perform this action",
+      });
 
     if (action === "upvote") {
       if (type === "Question") {
@@ -61,6 +72,10 @@ const Votes = ({
           hasupVoted: hasUpVoted,
           hasdownVoted: hasDownVoted,
           path: pathname,
+        });
+        return toast({
+          title: `Upvote ${!hasUpVoted ? "Successfull" : "Removed"}`,
+          variant: !hasUpVoted ? "default" : "destructive",
         });
       } else if (type === "Answer") {
         await upvoteAnswer({
@@ -81,6 +96,10 @@ const Votes = ({
           hasupVoted: hasUpVoted,
           hasdownVoted: hasDownVoted,
           path: pathname,
+        });
+        return toast({
+          title: `Downvote ${!hasDownVoted ? "Successfull" : "Removed"}`,
+          variant: !hasDownVoted ? "default" : "destructive",
         });
       } else if (type === "Answer") {
         await downvoteAnswer({
