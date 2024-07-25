@@ -17,7 +17,7 @@ const GlobalSearch = () => {
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
+    const handleOutsideClick = (event: any) => {
       if (
         searchContainerRef.current &&
         !searchContainerRef.current.contains(event.target)
