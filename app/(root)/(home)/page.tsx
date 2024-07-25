@@ -8,7 +8,14 @@ import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import { getQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Home | DevOverflow",
+  description:
+    "DevOverflow a clone of Stack Overflow, a community-driven platform for asking and answering programming questions.",
+};
 
 const Home = async ({ searchParams }: SearchParamsProps) => {
   const result = await getQuestions({
