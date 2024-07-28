@@ -5,13 +5,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 # Technology
 
-UI Framework - Next.js
-Database - MongoDB
-ORM - Mongoose
-Styles - TailwindCSS
-UI Components - Shadcn UI
-Authentication - Clerk
-Code Highlight - Prism.js
+- UI Framework - Next.js
+- Database - MongoDB
+- ORM - Mongoose
+- Styles - TailwindCSS
+- UI Components - Shadcn UI
+- Authentication - Clerk
+- Code Highlight - Prism.js
 
 ## Getting Started
 
