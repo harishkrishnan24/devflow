@@ -3,6 +3,16 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Technology
+
+UI Framework - Next.js
+Database - MongoDB
+ORM - Mongoose
+Styles - TailwindCSS
+UI Components - Shadcn UI
+Authentication - Clerk
+Code Highlight - Prism.js
+
 ## Getting Started
 
 First, run the development server:
